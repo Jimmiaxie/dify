@@ -1,11 +1,9 @@
 import { useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import Link from 'next/link'
 import { useDebounce } from 'ahooks'
 import {
   RiAlertFill,
   RiArrowDownSLine,
-  RiArrowRightUpLine,
   RiBrainLine,
 } from '@remixicon/react'
 import SystemModelSelector from './system-model-selector'
@@ -31,7 +29,6 @@ import ProviderCard from '@/app/components/plugins/provider-card'
 import List from '@/app/components/plugins/marketplace/list'
 import { useProviderContext } from '@/context/provider-context'
 import type { Plugin } from '@/app/components/plugins/types'
-import { MARKETPLACE_URL_PREFIX } from '@/config'
 import cn from '@/utils/classnames'
 import { getLocaleOnClient } from '@/i18n'
 
@@ -171,17 +168,17 @@ const ModelProviderPage = ({ searchText }: Props) => {
       <div className='mb-2'>
         <Divider className='!mt-4 h-px' />
         <div className='flex items-center justify-between'>
-          <div className='flex items-center gap-1 text-text-primary system-md-semibold cursor-pointer' onClick={() => setCollapse(!collapse)}>
+          <div className='flex items-center gap-1 mb-2 text-text-primary system-md-semibold cursor-pointer' onClick={() => setCollapse(!collapse)}>
             <RiArrowDownSLine className={cn('w-4 h-4', collapse && '-rotate-90')} />
             {t('common.modelProvider.installProvider')}
           </div>
-          <div className='flex items-center mb-2 pt-2'>
+          {/* <div className='flex items-center mb-2 pt-2'>
             <span className='pr-1 text-text-tertiary system-sm-regular'>{t('common.modelProvider.discoverMore')}</span>
             <Link target="_blank" href={`${MARKETPLACE_URL_PREFIX}`} className='inline-flex items-center system-sm-medium text-text-accent'>
               {t('plugin.marketplace.difyMarketplace')}
               <RiArrowRightUpLine className='w-4 h-4' />
             </Link>
-          </div>
+          </div> */}
         </div>
         {!collapse && isAllPluginsLoading && <Loading type='area' />}
         {
