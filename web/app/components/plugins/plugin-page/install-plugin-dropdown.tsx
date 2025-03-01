@@ -5,7 +5,6 @@ import { RiAddLine, RiArrowDownSLine } from '@remixicon/react'
 import Button from '@/app/components/base/button'
 import { MagicBox } from '@/app/components/base/icons/src/vender/solid/mediaAndDevices'
 import { FileZip } from '@/app/components/base/icons/src/vender/solid/files'
-import { Github } from '@/app/components/base/icons/src/vender/solid/general'
 import InstallFromGitHub from '@/app/components/plugins/install-plugin/install-from-github'
 import InstallFromLocalPackage from '@/app/components/plugins/install-plugin/install-from-local-package'
 import cn from '@/utils/classnames'
@@ -89,7 +88,7 @@ const InstallPluginDropdown = ({
                     ? [{ icon: MagicBox, text: t('plugin.source.marketplace'), action: 'marketplace' }]
                     : []
                 ),
-                { icon: Github, text: t('plugin.source.github'), action: 'github' },
+                // { icon: Github, text: t('plugin.source.github'), action: 'github' },
                 { icon: FileZip, text: t('plugin.source.local'), action: 'local' },
               ].map(({ icon: Icon, text, action }) => (
                 <div

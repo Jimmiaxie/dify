@@ -6,7 +6,6 @@ import { useContext } from 'use-context-selector'
 import { RiArrowDownSLine, RiLogoutBoxRLine } from '@remixicon/react'
 import Link from 'next/link'
 import { Menu, Transition } from '@headlessui/react'
-import Indicator from '../indicator'
 import AccountAbout from '../account-about'
 import { mailToSupport } from '../utils/util'
 import classNames from '@/utils/classnames'
@@ -16,7 +15,6 @@ import { logout } from '@/service/common'
 import { useAppContext } from '@/context/app-context'
 import { ArrowUpRight } from '@/app/components/base/icons/src/vender/line/arrows'
 import { useModalContext } from '@/context/modal-context'
-import { LanguagesSupported } from '@/i18n/language'
 import { useProviderContext } from '@/context/provider-context'
 import { Plan } from '@/app/components/billing/type'
 
@@ -128,7 +126,7 @@ export default function AppSelector({ isMobile }: IAppSelector) {
                         <ArrowUpRight className='hidden w-[14px] h-[14px] text-text-tertiary group-hover:flex' />
                       </a>}
                     </Menu.Item>}
-                    <Menu.Item>
+                    {/* <Menu.Item>
                       {({ active }) => <Link
                         className={classNames(itemClassName, 'group justify-between',
                           active && 'bg-state-base-hover',
@@ -138,8 +136,8 @@ export default function AppSelector({ isMobile }: IAppSelector) {
                         <div>{t('common.userProfile.communityFeedback')}</div>
                         <ArrowUpRight className='hidden w-[14px] h-[14px] text-text-tertiary group-hover:flex' />
                       </Link>}
-                    </Menu.Item>
-                    <Menu.Item>
+                    </Menu.Item> */}
+                    {/* <Menu.Item>
                       {({ active }) => <Link
                         className={classNames(itemClassName, 'group justify-between',
                           active && 'bg-state-base-hover',
@@ -149,8 +147,8 @@ export default function AppSelector({ isMobile }: IAppSelector) {
                         <div>{t('common.userProfile.community')}</div>
                         <ArrowUpRight className='hidden w-[14px] h-[14px] text-text-tertiary group-hover:flex' />
                       </Link>}
-                    </Menu.Item>
-                    <Menu.Item>
+                    </Menu.Item> */}
+                    {/* <Menu.Item>
                       {({ active }) => <Link
                         className={classNames(itemClassName, 'group justify-between',
                           active && 'bg-state-base-hover',
@@ -162,8 +160,8 @@ export default function AppSelector({ isMobile }: IAppSelector) {
                         <div>{t('common.userProfile.helpCenter')}</div>
                         <ArrowUpRight className='hidden w-[14px] h-[14px] text-text-tertiary group-hover:flex' />
                       </Link>}
-                    </Menu.Item>
-                    <Menu.Item>
+                    </Menu.Item> */}
+                    {/* <Menu.Item>
                       {({ active }) => <Link
                         className={classNames(itemClassName, 'group justify-between',
                           active && 'bg-state-base-hover',
@@ -173,8 +171,8 @@ export default function AppSelector({ isMobile }: IAppSelector) {
                         <div>{t('common.userProfile.roadmap')}</div>
                         <ArrowUpRight className='hidden w-[14px] h-[14px] text-text-tertiary group-hover:flex' />
                       </Link>}
-                    </Menu.Item>
-                    {
+                    </Menu.Item> */}
+                    {/* {
                       document?.body?.getAttribute('data-public-site-about') !== 'hide' && (
                         <Menu.Item>
                           {({ active }) => <div className={classNames(itemClassName, 'justify-between',
@@ -188,7 +186,7 @@ export default function AppSelector({ isMobile }: IAppSelector) {
                           </div>}
                         </Menu.Item>
                       )
-                    }
+                    } */}
                   </div>
                   <Menu.Item>
                     {({ active }) => <div className='p-1' onClick={() => handleLogout()}>

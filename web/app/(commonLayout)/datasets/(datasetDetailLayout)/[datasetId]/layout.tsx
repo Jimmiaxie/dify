@@ -15,7 +15,7 @@ import {
   // CommandLineIcon as CommandLineSolidIcon,
   DocumentTextIcon as DocumentTextSolidIcon,
 } from '@heroicons/react/24/solid'
-import { RiApps2AddLine, RiInformation2Line } from '@remixicon/react'
+import { RiInformation2Line } from '@remixicon/react'
 import s from './style.module.css'
 import classNames from '@/utils/classnames'
 import { fetchDatasetDetail, fetchDatasetRelatedApps } from '@/service/datasets'
@@ -25,7 +25,6 @@ import Loading from '@/app/components/base/loading'
 import DatasetDetailContext from '@/context/dataset-detail'
 import { DataSourceType } from '@/models/datasets'
 import useBreakpoints, { MediaType } from '@/hooks/use-breakpoints'
-import { LanguagesSupported } from '@/i18n/language'
 import { useStore } from '@/app/components/app/store'
 import { getLocaleOnClient } from '@/i18n'
 import { useAppContext } from '@/context/app-context'
@@ -112,36 +111,39 @@ const ExtraInfo = ({ isMobile, relatedApps, expand }: IExtraInfoProps) => {
       </>
     )}
     {!hasRelatedApps && !expand && (
-      <Tooltip
-        position='right'
-        noDecoration
-        needsDelay
-        popupContent={
-          <div className='p-4 w-[240px] bg-components-panel-bg-blur border-[0.5px] border-components-panel-border rounded-xl'>
-            <div className='inline-flex p-2 rounded-lg border-[0.5px] border-components-panel-border-subtle bg-background-default-subtle'>
-              <RiApps2AddLine className='h-4 w-4 text-text-tertiary' />
-            </div>
-            <div className='text-xs text-text-tertiary my-2'>{t('common.datasetMenus.emptyTip')}</div>
-            <a
-              className='inline-flex items-center text-xs text-text-accent mt-2 cursor-pointer'
-              href={
-                locale === LanguagesSupported[1]
-                  ? 'https://docs.dify.ai/v/zh-hans/guides/knowledge-base/integrate-knowledge-within-application'
-                  : 'https://docs.dify.ai/guides/knowledge-base/integrate-knowledge-within-application'
-              }
-              target='_blank' rel='noopener noreferrer'
-            >
-              <BookOpenIcon className='mr-1' />
-              {t('common.datasetMenus.viewDoc')}
-            </a>
-          </div>
-        }
-      >
-        <div className='inline-flex items-center system-xs-medium-uppercase text-text-secondary space-x-1 cursor-pointer'>
-          <span>{t('common.datasetMenus.noRelatedApp')}</span>
-          <RiInformation2Line className='w-4 h-4' />
-        </div>
-      </Tooltip>
+      // <Tooltip
+      //   position='right'
+      //   noDecoration
+      //   needsDelay
+      //   popupContent={
+      //     <div className='p-4 w-[240px] bg-components-panel-bg-blur border-[0.5px] border-components-panel-border rounded-xl'>
+      //       <div className='inline-flex p-2 rounded-lg border-[0.5px] border-components-panel-border-subtle bg-background-default-subtle'>
+      //         <RiApps2AddLine className='h-4 w-4 text-text-tertiary' />
+      //       </div>
+      //       <div className='text-xs text-text-tertiary my-2'>{t('common.datasetMenus.emptyTip')}</div>
+      //       <a
+      //         className='inline-flex items-center text-xs text-text-accent mt-2 cursor-pointer'
+      //         href={
+      //           locale === LanguagesSupported[1]
+      //             ? 'https://docs.dify.ai/v/zh-hans/guides/knowledge-base/integrate-knowledge-within-application'
+      //             : 'https://docs.dify.ai/guides/knowledge-base/integrate-knowledge-within-application'
+      //         }
+      //         target='_blank' rel='noopener noreferrer'
+      //       >
+      //         <BookOpenIcon className='mr-1' />
+      //         {t('common.datasetMenus.viewDoc')}
+      //       </a>
+      //     </div>
+      //   }
+      // >
+      //   <div className='inline-flex items-center system-xs-medium-uppercase text-text-secondary space-x-1 cursor-pointer'>
+      //     <span>{t('common.datasetMenus.noRelatedApp')}</span>
+      //     <RiInformation2Line className='w-4 h-4' />
+      //   </div>
+      // </Tooltip>
+      <div className='inline-flex items-center system-xs-medium-uppercase text-text-secondary space-x-1'>
+        <span>{t('common.datasetMenus.noRelatedApp')}</span>
+      </div>
     )}
   </div>
 }

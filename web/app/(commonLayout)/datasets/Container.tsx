@@ -10,10 +10,8 @@ import { useQuery } from '@tanstack/react-query'
 // Components
 import ExternalAPIPanel from '../../components/datasets/external-api/external-api-panel'
 import Datasets from './Datasets'
-import DatasetFooter from './DatasetFooter'
 import ApiServer from './ApiServer'
 import Doc from './Doc'
-import TabSliderNew from '@/app/components/base/tab-slider-new'
 import TagManagementModal from '@/app/components/base/tag-management'
 import TagFilter from '@/app/components/base/tag-management/filter'
 import Button from '@/app/components/base/button'
@@ -83,12 +81,12 @@ const Container = () => {
 
   return (
     <div ref={containerRef} className='grow relative flex flex-col bg-background-body overflow-y-auto scroll-container'>
-      <div className='sticky top-0 flex justify-between pt-4 px-12 pb-2 leading-[56px] bg-background-body z-10 flex-wrap gap-y-2'>
-        <TabSliderNew
+      <div className='sticky top-0 flex justify-end pt-4 px-12 pb-2 leading-[56px] bg-background-body z-10 flex-wrap gap-y-2'>
+        {/* <TabSliderNew
           value={activeTab}
           onChange={newActiveTab => setActiveTab(newActiveTab)}
           options={options}
-        />
+        /> */}
         {activeTab === 'dataset' && (
           <div className='flex items-center justify-center gap-2'>
             {isCurrentWorkspaceOwner && <CheckboxWithLabel
@@ -123,7 +121,7 @@ const Container = () => {
       {activeTab === 'dataset' && (
         <>
           <Datasets containerRef={containerRef} tags={tagIDs} keywords={searchKeywords} includeAll={includeAll} />
-          <DatasetFooter />
+          {/* <DatasetFooter /> */}
           {showTagManagementModal && (
             <TagManagementModal type='knowledge' show={showTagManagementModal} />
           )}

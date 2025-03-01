@@ -8,8 +8,6 @@ import {
   RiDashboard2Line,
   RiFileList3Fill,
   RiFileList3Line,
-  RiTerminalBoxFill,
-  RiTerminalBoxLine,
   RiTerminalWindowFill,
   RiTerminalWindowLine,
 } from '@remixicon/react'
@@ -69,12 +67,12 @@ const AppDetailLayout: FC<IAppDetailLayoutProps> = (props) => {
         }]
         : []
       ),
-      {
-        name: t('common.appMenus.apiAccess'),
-        href: `/app/${appId}/develop`,
-        icon: RiTerminalBoxLine,
-        selectedIcon: RiTerminalBoxFill,
-      },
+      // {
+      //   name: t('common.appMenus.apiAccess'),
+      //   href: `/app/${appId}/develop`,
+      //   icon: RiTerminalBoxLine,
+      //   selectedIcon: RiTerminalBoxFill,
+      // },
       ...(isCurrentWorkspaceEditor
         ? [{
           name: mode !== 'workflow'
