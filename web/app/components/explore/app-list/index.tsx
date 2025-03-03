@@ -72,7 +72,7 @@ const Apps = ({
     () =>
       fetchAppList().then(({ categories, recommended_apps }) => ({
         categories,
-        allList: recommended_apps.sort((a, b) => a.position - b.position),
+        allList: recommended_apps.sort((a, b) => a.position - b.position).filter(i => i.app_id !== '55fe1a3e-0ae9-4ae6-923d-add78079fa6d'),
       })),
     {
       fallbackData: {

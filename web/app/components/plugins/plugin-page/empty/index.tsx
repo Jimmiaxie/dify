@@ -1,7 +1,6 @@
 import React, { useMemo, useRef, useState } from 'react'
 import { MagicBox } from '@/app/components/base/icons/src/vender/solid/mediaAndDevices'
 import { FileZip } from '@/app/components/base/icons/src/vender/solid/files'
-import { Github } from '@/app/components/base/icons/src/vender/solid/general'
 import InstallFromGitHub from '@/app/components/plugins/install-plugin/install-from-github'
 import InstallFromLocalPackage from '@/app/components/plugins/install-plugin/install-from-local-package'
 import { usePluginPageContext } from '../context'
@@ -75,7 +74,7 @@ const Empty = () => {
                     ? [{ icon: MagicBox, text: t('plugin.list.source.marketplace'), action: 'marketplace' }]
                     : []
                 ),
-                { icon: Github, text: t('plugin.list.source.github'), action: 'github' },
+                // { icon: Github, text: t('plugin.list.source.github'), action: 'github' },
                 { icon: FileZip, text: t('plugin.list.source.local'), action: 'local' },
               ].map(({ icon: Icon, text, action }) => (
                 <div

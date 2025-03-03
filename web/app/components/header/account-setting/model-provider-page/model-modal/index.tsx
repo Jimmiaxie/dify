@@ -41,7 +41,6 @@ import ModelLoadBalancingConfigs from '../provider-added-card/model-load-balanci
 import Form from './Form'
 import Button from '@/app/components/base/button'
 import { Lock01 } from '@/app/components/base/icons/src/vender/solid/security'
-import { LinkExternal02 } from '@/app/components/base/icons/src/vender/line/general'
 import {
   PortalToFollowElem,
   PortalToFollowElemContent,
@@ -308,15 +307,16 @@ const ModelModal: FC<ModelModalProps> = ({
                 {
                   (provider.help && (provider.help.title || provider.help.url))
                     ? (
-                      <a
-                        href={provider.help?.url[language] || provider.help?.url.en_US}
-                        target='_blank' rel='noopener noreferrer'
-                        className='inline-flex items-center text-xs text-primary-600'
-                        onClick={e => !provider.help.url && e.preventDefault()}
-                      >
-                        {provider.help.title?.[language] || provider.help.url[language] || provider.help.title?.en_US || provider.help.url.en_US}
-                        <LinkExternal02 className='ml-1 w-3 h-3' />
-                      </a>
+                      // <a
+                      //   href={provider.help?.url[language] || provider.help?.url.en_US}
+                      //   target='_blank' rel='noopener noreferrer'
+                      //   className='inline-flex items-center text-xs text-primary-600'
+                      //   onClick={e => !provider.help.url && e.preventDefault()}
+                      // >
+                      //   {provider.help.title?.[language] || provider.help.url[language] || provider.help.title?.en_US || provider.help.url.en_US}
+                      //   <LinkExternal02 className='ml-1 w-3 h-3' />
+                      // </a>
+                      <div></div>
                     )
                     : <div />
                 }

@@ -2,9 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import Link from 'next/link'
 import {
-  RiBookOpenLine,
   RiDragDropLine,
   RiEqualizer2Line,
 } from '@remixicon/react'
@@ -160,7 +158,7 @@ const PluginPage = ({
             />
           </div>
           <div className='flex shrink-0 items-center gap-1'>
-            {
+            {/* {
               activeTab === 'discover' && (
                 <>
                   <Link
@@ -178,7 +176,7 @@ const PluginPage = ({
                   <div className='mx-2 w-[1px] h-3.5 bg-divider-regular'></div>
                 </>
               )
-            }
+            } */}
             <PluginTasks />
             {canManagement && (
               <InstallPluginDropdown

@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next'
 import {
   RiEqualizer2Line,
   RiExternalLinkLine,
-  RiPaintBrushLine,
   RiWindowLine,
 } from '@remixicon/react'
 import SettingsModal from './settings'
@@ -73,7 +72,7 @@ function AppCard({
     if (appInfo.mode !== 'completion' && appInfo.mode !== 'workflow')
       operationsMap.webapp.push({ opName: t('appOverview.overview.appInfo.embedded.entry'), opIcon: RiWindowLine })
 
-    operationsMap.webapp.push({ opName: t('appOverview.overview.appInfo.customize.entry'), opIcon: RiPaintBrushLine })
+    // operationsMap.webapp.push({ opName: t('appOverview.overview.appInfo.customize.entry'), opIcon: RiPaintBrushLine })
 
     if (isCurrentWorkspaceEditor)
       operationsMap.webapp.push({ opName: t('appOverview.overview.appInfo.settings.entry'), opIcon: RiEqualizer2Line })

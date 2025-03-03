@@ -40,7 +40,7 @@ const ListWithCollection = ({
             <div className='flex justify-between items-end'>
               <div>
                 <div className='title-xl-semi-bold text-text-primary'>{collection.label[getLanguage(locale)]}</div>
-                <div className='system-xs-regular text-text-tertiary'>{collection.description[getLanguage(locale)]}</div>
+                {/* <div className='system-xs-regular text-text-tertiary'>{collection.description[getLanguage(locale)]}</div> */}
               </div>
               {
                 collection.searchable && onMoreClick && (
