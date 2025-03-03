@@ -1,4 +1,5 @@
 'use client'
+import { useStore as useAppStore } from '@/app/components/app/store'
 
 class StorageMock {
   data: Record<string, string>
@@ -46,6 +47,32 @@ Object.defineProperty(globalThis, 'sessionStorage', {
 const BrowserInitor = ({
   children,
 }: { children: React.ReactElement }) => {
+  // 设置隐藏显示顶部导航栏
+  const setHideHeader = useAppStore(state => state.setHideHeader)
+  try {
+    const isDevelopment = process.env.NODE_ENV === 'development'
+    if(isDevelopment) {
+      window.addEventListener('message', (event) => {
+        const { hideHeader } = event.data
+        setHideHeader(!!hideHeader)
+      }, false)
+    }
+    else {
+      const parentWindow = window.parent
+      const iframeElement = parentWindow.document.getElementById('aiFrame')
+      if(iframeElement) {
+        const hasHideHeader = iframeElement.hasAttribute('hideHeader')
+        const hideHeaderValue = iframeElement.getAttribute('hideHeader')
+        setHideHeader(hasHideHeader || hideHeaderValue === 'true')
+      }
+      const windowHideHeaderValue = (parentWindow as any)?.hiddenHeader
+      if(windowHideHeaderValue) setHideHeader(windowHideHeaderValue)
+    }
+  }
+  catch (error) {
+    console.log(error)
+  }
+
   return children
 }
 

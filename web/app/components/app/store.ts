@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import type { App, AppSSO } from '@/types/app'
 import type { IChatItem } from '@/app/components/base/chat/chat/type'
 
-interface State {
+type State = {
   appDetail?: App & Partial<AppSSO>
   appSidebarExpand: string
   currentLogItem?: IChatItem
@@ -11,9 +11,11 @@ interface State {
   showAgentLogModal: boolean
   showMessageLogModal: boolean
   showAppConfigureFeaturesModal: boolean
+  // 隐藏头部导航栏
+  hideHeader: boolean
 }
 
-interface Action {
+type Action = {
   setAppDetail: (appDetail?: App & Partial<AppSSO>) => void
   setAppSiderbarExpand: (state: string) => void
   setCurrentLogItem: (item?: IChatItem) => void
@@ -22,6 +24,7 @@ interface Action {
   setShowAgentLogModal: (showAgentLogModal: boolean) => void
   setShowMessageLogModal: (showMessageLogModal: boolean) => void
   setShowAppConfigureFeaturesModal: (showAppConfigureFeaturesModal: boolean) => void
+  setHideHeader: (hideHeader: boolean) => void
 }
 
 export const useStore = create<State & Action>(set => ({
@@ -51,4 +54,6 @@ export const useStore = create<State & Action>(set => ({
   }),
   showAppConfigureFeaturesModal: false,
   setShowAppConfigureFeaturesModal: showAppConfigureFeaturesModal => set(() => ({ showAppConfigureFeaturesModal })),
+  hideHeader: false,
+  setHideHeader: hideHeader => set(() => ({ hideHeader })),
 }))
