@@ -11,7 +11,7 @@ type State = {
   showAgentLogModal: boolean
   showMessageLogModal: boolean
   showAppConfigureFeaturesModal: boolean
-  // 隐藏头部导航栏
+  /** 隐藏头部导航栏 */
   hideHeader: boolean
 }
 
