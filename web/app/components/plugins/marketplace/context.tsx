@@ -37,6 +37,9 @@ import {
   getMarketplaceListFilterType,
 } from './utils'
 import { useInstalledPluginList } from '@/service/use-plugins'
+import NoNetworkWrapper from './list/no-network-wrapper'
+import Loading from '@/app/components/base/loading'
+import cn from '@/utils/classnames'
 
 export type MarketplaceContextValue = {
   intersected: boolean
@@ -66,26 +69,26 @@ export type MarketplaceContextValue = {
 
 export const MarketplaceContext = createContext<MarketplaceContextValue>({
   intersected: true,
-  setIntersected: () => {},
+  setIntersected: () => { },
   searchPluginText: '',
-  handleSearchPluginTextChange: () => {},
+  handleSearchPluginTextChange: () => { },
   filterPluginTags: [],
-  handleFilterPluginTagsChange: () => {},
+  handleFilterPluginTagsChange: () => { },
   activePluginType: 'all',
-  handleActivePluginTypeChange: () => {},
+  handleActivePluginTypeChange: () => { },
   page: 1,
-  handlePageChange: () => {},
+  handlePageChange: () => { },
   plugins: undefined,
   pluginsTotal: 0,
-  resetPlugins: () => {},
+  resetPlugins: () => { },
   sort: DEFAULT_SORT,
-  handleSortChange: () => {},
-  handleQueryPlugins: () => {},
-  handleMoreClick: () => {},
+  handleSortChange: () => { },
+  handleQueryPlugins: () => { },
+  handleMoreClick: () => { },
   marketplaceCollectionsFromClient: [],
-  setMarketplaceCollectionsFromClient: () => {},
+  setMarketplaceCollectionsFromClient: () => { },
   marketplaceCollectionPluginsMapFromClient: {},
-  setMarketplaceCollectionPluginsMapFromClient: () => {},
+  setMarketplaceCollectionPluginsMapFromClient: () => { },
   isLoading: false,
   isSuccessCollections: false,
 })
@@ -95,6 +98,7 @@ type MarketplaceContextProviderProps = {
   searchParams?: SearchParams
   shouldExclude?: boolean
   scrollContainerId?: string
+  locale: string
 }
 
 export function useMarketplaceContext(selector: (value: MarketplaceContextValue) => any) {
@@ -106,6 +110,7 @@ export const MarketplaceContextProvider = ({
   searchParams,
   shouldExclude,
   scrollContainerId,
+  locale,
 }: MarketplaceContextProviderProps) => {
   const { data, isSuccess } = useInstalledPluginList(!shouldExclude)
   const exclude = useMemo(() => {
@@ -167,7 +172,7 @@ export const MarketplaceContextProvider = ({
         })
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryPlugins, queryMarketplaceCollectionsAndPlugins, isSuccess, exclude])
 
   const handleQueryMarketplaceCollectionsAndPlugins = useCallback(() => {
@@ -310,7 +315,17 @@ export const MarketplaceContextProvider = ({
         isSuccessCollections,
       }}
     >
-      {children}
+      {(isLoading || isPluginsLoading) && (
+        <div className='absolute w-full h-[calc(100%-56px)] bg-background-default-subtle z-[1002] top-[56px]'>
+          <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+            <Loading />
+          </div>
+        </div>
+      )}
+      <div className={cn((isLoading || isPluginsLoading) ? 'opacity-0' : '')}>
+        {!isLoading && !isPluginsLoading && (!plugins?.length && !Object.keys(marketplaceCollectionPluginsMapFromClient || {}).length) && <NoNetworkWrapper locale={locale} />}
+        {!isLoading && !isPluginsLoading && (plugins?.length || Object.keys(marketplaceCollectionPluginsMapFromClient || {}).length) && children}
+      </div>
     </MarketplaceContext.Provider>
   )
 }

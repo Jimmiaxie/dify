@@ -1,0 +1,30 @@
+.noNetworWarp {
+  display: inline-flex;
+  gap: 16px;
+  flex-direction: column;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.noNetworIcon {
+  width: 140px;
+  height: 140px;
+  background-image: url(../assets/no-network.svg);
+}
+
+.noNetworTitle {
+  color: var(--Font-Main-Font, #001833);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.noNetworBtn {
+  color: var(--Button-Secondary-Button-Secondary-Button-Font, #007AFF);
+  border-radius: 100px;
+  border: 1px solid var(--Button-Secondary-Button-Secondary-Button-Line, #007AFF);
+  background: var(--Button-Secondary-Button-Secondary-Button-bg, #FFF);
+  font-size: 14px;
+  font-weight: 400;
+}

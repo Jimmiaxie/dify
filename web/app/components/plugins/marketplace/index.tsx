@@ -42,6 +42,7 @@ const Marketplace = async ({
         searchParams={searchParams}
         shouldExclude={shouldExclude}
         scrollContainerId={scrollContainerId}
+        locale={locale}
       >
         <Description locale={locale} />
         <IntersectionLine intersectionContainerId={intersectionContainerId} />

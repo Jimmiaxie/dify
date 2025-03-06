@@ -83,6 +83,8 @@ export const useMarketplacePlugins = () => {
           return getFormattedPlugin(plugin)
         }))
       }
+    }).catch(() => {
+      setPrevPlugins([])
     })
   }, [mutateAsync])
   const queryPlugins = useCallback((pluginsSearchParams: PluginsSearchParams) => {

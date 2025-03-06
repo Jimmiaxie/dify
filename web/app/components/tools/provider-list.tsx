@@ -1,5 +1,5 @@
 'use client'
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { Collection } from './types'
 import Marketplace from './marketplace'
@@ -23,6 +23,8 @@ const ProviderList = () => {
   const { t } = useTranslation()
   const containerRef = useRef<HTMLDivElement>(null)
   const { enable_marketplace } = useAppContextSelector(s => s.systemFeatures)
+  const { show_featured } = useAppContextSelector(s => s.intelligenceConfig)
+  const updateIntelligenceConfig = useAppContextSelector(s => s.updateIntelligenceConfig)
 
   const [activeTab, setActiveTab] = useTabSearchParams({
     defaultTab: 'builtin',
@@ -60,6 +62,10 @@ const ProviderList = () => {
     const detail = pluginList?.plugins.find(plugin => plugin.plugin_id === currentProvider?.plugin_id)
     return detail
   }, [currentProvider?.plugin_id, pluginList?.plugins])
+
+  useEffect(() => {
+    updateIntelligenceConfig()
+  }, [])
 
   return (
     <>
@@ -131,7 +137,7 @@ const ProviderList = () => {
             <Empty lightCard text={t('tools.noTools')} className='px-12 h-[224px]' />
           )}
           {
-            enable_marketplace && activeTab === 'builtin' && (
+            show_featured && enable_marketplace && activeTab === 'builtin' && (
               <Marketplace
                 onMarketplaceScroll={() => {
                   containerRef.current?.scrollTo({ top: containerRef.current.scrollHeight, behavior: 'smooth' })

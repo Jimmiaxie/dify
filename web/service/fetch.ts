@@ -2,7 +2,7 @@ import type { AfterResponseHook, BeforeErrorHook, BeforeRequestHook, Hooks } fro
 import ky from 'ky'
 import type { IOtherOptions } from './base'
 import Toast from '@/app/components/base/toast'
-import { API_PREFIX, MARKETPLACE_API_PREFIX, PUBLIC_API_PREFIX } from '@/config'
+import { API_PREFIX, INTELLIGENCE_API_PREFIX, MARKETPLACE_API_PREFIX, PUBLIC_API_PREFIX } from '@/config'
 
 const TIME_OUT = 100000
 
@@ -134,18 +134,30 @@ async function base<T>(url: string, options: FetchOptionType = {}, otherOptions:
   const {
     isPublicAPI = false,
     isMarketplaceAPI = false,
+    isIntelligenceAPI = false,
     bodyStringify = true,
     needAllResponseContent,
     deleteContentType,
     getAbortController,
   } = otherOptions
 
-  const base
-    = isMarketplaceAPI
-      ? MARKETPLACE_API_PREFIX
-      : isPublicAPI
-        ? PUBLIC_API_PREFIX
-        : API_PREFIX
+  let base = ''
+
+  if(isMarketplaceAPI)
+    base = MARKETPLACE_API_PREFIX
+  else if(isIntelligenceAPI)
+    base = INTELLIGENCE_API_PREFIX
+  else if(isPublicAPI)
+    base = PUBLIC_API_PREFIX
+  else
+    base = API_PREFIX
+
+  // const base
+  //   = isMarketplaceAPI
+  //     ? MARKETPLACE_API_PREFIX
+  //     : isPublicAPI
+  //       ? PUBLIC_API_PREFIX
+  //       : API_PREFIX
 
   if (getAbortController) {
     const abortController = new AbortController()

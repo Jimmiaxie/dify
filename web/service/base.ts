@@ -59,6 +59,8 @@ export type IOnAgentLog = (agentLog: AgentLogResponse) => void
 export type IOtherOptions = {
   isPublicAPI?: boolean
   isMarketplaceAPI?: boolean
+  /** 智能体api */
+  isIntelligenceAPI?: boolean
   bodyStringify?: boolean
   needAllResponseContent?: boolean
   deleteContentType?: boolean
@@ -496,6 +498,11 @@ export const getPublic = <T>(url: string, options = {}, otherOptions?: IOtherOpt
 // For Marketplace API
 export const getMarketplace = <T>(url: string, options = {}, otherOptions?: IOtherOptions) => {
   return get<T>(url, options, { ...otherOptions, isMarketplaceAPI: true })
+}
+
+// For Intelligence API
+export const getIntelligence = <T>(url: string, options = {}, otherOptions?: IOtherOptions) => {
+  return get<T>(url, options, { ...otherOptions, isIntelligenceAPI: true })
 }
 
 export const post = <T>(url: string, options = {}, otherOptions?: IOtherOptions) => {

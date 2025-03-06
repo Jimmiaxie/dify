@@ -8,9 +8,10 @@ import { fetchAppList } from '@/service/apps'
 import Loading from '@/app/components/base/loading'
 import { fetchCurrentWorkspace, fetchLanggeniusVersion, fetchUserProfile, getSystemFeatures } from '@/service/common'
 import type { App } from '@/types/app'
-import type { ICurrentWorkspace, LangGeniusVersionResponse, UserProfileResponse } from '@/models/common'
+import type { ICurrentWorkspace, IntelligenceConfig, LangGeniusVersionResponse, UserProfileResponse } from '@/models/common'
 import type { SystemFeatures } from '@/types/feature'
 import { defaultSystemFeatures } from '@/types/feature'
+import { getIntelligenceConfig } from '@/service/intelligence'
 
 export type AppContextValue = {
   apps: App[]
@@ -28,6 +29,10 @@ export type AppContextValue = {
   langeniusVersionInfo: LangGeniusVersionResponse
   useSelector: typeof useSelector
   isLoadingCurrentWorkspace: boolean
+  /** 外部控制显示数据 */
+  intelligenceConfig: IntelligenceConfig
+  /** 更新外部控制显示数据 */
+  updateIntelligenceConfig: VoidFunction
 }
 
 const initialLangeniusVersionInfo = {
@@ -74,6 +79,11 @@ const AppContext = createContext<AppContextValue>({
   langeniusVersionInfo: initialLangeniusVersionInfo,
   useSelector,
   isLoadingCurrentWorkspace: false,
+  intelligenceConfig: {
+    show_discovery: false,
+    show_featured: false,
+  },
+  updateIntelligenceConfig: () => { },
 })
 
 export function useSelector<T>(selector: (value: AppContextValue) => T): T {
@@ -96,6 +106,7 @@ export const AppContextProvider: FC<AppContextProviderProps> = ({ children }) =>
   })
 
   const [userProfile, setUserProfile] = useState<UserProfileResponse>()
+  const [intelligenceConfig, setIntelligenceConfig] = useState<IntelligenceConfig>({ show_discovery: false, show_featured: false })
   const [langeniusVersionInfo, setLangeniusVersionInfo] = useState<LangGeniusVersionResponse>(initialLangeniusVersionInfo)
   const [currentWorkspace, setCurrentWorkspace] = useState<ICurrentWorkspace>(initialWorkspaceInfo)
   const isCurrentWorkspaceManager = useMemo(() => ['owner', 'admin'].includes(currentWorkspace.role), [currentWorkspace.role])
@@ -112,6 +123,15 @@ export const AppContextProvider: FC<AppContextProviderProps> = ({ children }) =>
       setLangeniusVersionInfo({ ...versionData, current_version, latest_version: versionData.version, current_env })
     }
   }, [userProfileResponse])
+
+  const updateIntelligenceConfig = async () => {
+    const config = await getIntelligenceConfig()
+    setIntelligenceConfig(config)
+  }
+
+  useEffect(() => {
+    updateIntelligenceConfig()
+  }, [])
 
   useEffect(() => {
     updateUserProfileAndVersion()
@@ -142,6 +162,8 @@ export const AppContextProvider: FC<AppContextProviderProps> = ({ children }) =>
       isCurrentWorkspaceDatasetOperator,
       mutateCurrentWorkspace,
       isLoadingCurrentWorkspace,
+      intelligenceConfig,
+      updateIntelligenceConfig,
     }}>
       <div className='flex flex-col h-full overflow-y-auto'>
         {/* {globalThis.document?.body?.getAttribute('data-public-maintenance-notice') && <MaintenanceNotice />} */}

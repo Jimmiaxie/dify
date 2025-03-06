@@ -6,6 +6,7 @@ export let apiPrefix = ''
 export let publicApiPrefix = ''
 export let marketplaceApiPrefix = ''
 export let marketplaceUrlPrefix = ''
+export let intelligenceApiPrefix = ''
 
 // NEXT_PUBLIC_API_PREFIX=/console/api NEXT_PUBLIC_PUBLIC_API_PREFIX=/api npm run start
 if (process.env.NEXT_PUBLIC_API_PREFIX && process.env.NEXT_PUBLIC_PUBLIC_API_PREFIX) {
@@ -38,10 +39,16 @@ else {
   marketplaceUrlPrefix = globalThis.document?.body?.getAttribute('data-marketplace-url-prefix') || ''
 }
 
+if(process.env.NEXT_INTELLIGENCE_API_PREFIX)
+  intelligenceApiPrefix = process.env.NEXT_INTELLIGENCE_API_PREFIX
+else
+  intelligenceApiPrefix = globalThis.document?.body?.getAttribute('data-intelligence-api-prefix') || ''
+
 export const API_PREFIX: string = apiPrefix
 export const PUBLIC_API_PREFIX: string = publicApiPrefix
 export const MARKETPLACE_API_PREFIX: string = marketplaceApiPrefix
 export const MARKETPLACE_URL_PREFIX: string = marketplaceUrlPrefix
+export const INTELLIGENCE_API_PREFIX: string = intelligenceApiPrefix
 
 const EDITION = process.env.NEXT_PUBLIC_EDITION || globalThis.document?.body?.getAttribute('data-public-edition') || 'SELF_HOSTED'
 export const IS_CE_EDITION = EDITION === 'SELF_HOSTED'
