@@ -322,9 +322,8 @@ export const MarketplaceContextProvider = ({
           </div>
         </div>
       )}
-      <div className={cn((isLoading || isPluginsLoading) ? 'opacity-0' : '')}>
-        {!isLoading && !isPluginsLoading && (!plugins?.length && !Object.keys(marketplaceCollectionPluginsMapFromClient || {}).length) && <NoNetworkWrapper locale={locale} />}
-        {!isLoading && !isPluginsLoading && (plugins?.length || Object.keys(marketplaceCollectionPluginsMapFromClient || {}).length) && children}
+      <div className={cn('flex-grow grow flex flex-col', (isLoading || isPluginsLoading) && 'opacity-0')}>
+        {isSuccessCollections ? children : <NoNetworkWrapper locale={locale} />}
       </div>
     </MarketplaceContext.Provider>
   )
