@@ -235,6 +235,10 @@ const Link = ({ node, ...props }: any) => {
     return <abbr className="underline decoration-dashed !decoration-primary-700 cursor-pointer" onClick={() => onSend?.(hidden_text)} title={node.children[0]?.value}>{node.children[0]?.value}</abbr>
   }
   else {
+    const { href } = props
+
+    if (href) setTimeout(() => window.open(href, '_blank'), 1000)
+
     return <a {...props} target="_blank" className="underline decoration-dashed !decoration-primary-700 cursor-pointer">{node.children[0] ? node.children[0]?.value : 'Download'}</a>
   }
 }
